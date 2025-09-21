@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quote of the Day</title>
+</head>
+<body>
+  <h1>Quote of the Day</h1>
+
+  <script>
+    // Step 1: array with 5 quotes
+    var quotes = [
+      "Believe you can and you're halfway there.",
+      "Do one thing every day that scares you.",
+      "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "Happiness is not something ready made. It comes from your own actions.",
+      "The best way to get started is to quit talking and begin doing."
+    ];
+
+    // Step 2: ask the user for a number (repeat until they give a valid whole number or cancel)
+    var userNumber;
+    while (true) {
+      var raw = prompt("Enter a whole number to select the Quote of the Day (example: 7):");
+      if (raw === null) {            // user clicked Cancel
+        alert("No number entered — using 0 by default.");
+        userNumber = 0;
+        break;
+      }
+      raw = raw.trim();
+      if (raw === "") {
+        alert("Please type a number (not blank).");
+        continue;
+      }
+      var parsed = parseInt(raw, 10);
+      if (!isNaN(parsed)) {
+        userNumber = Math.abs(parsed); // use absolute to avoid negative index confusion
+        break;
+      } else {
+        alert("Please enter a valid whole number (e.g., 5).");
+      }
+    }
+
+    // Step 3: divide by 5 and get remainder (modulus) and use that as array index
+    var index = userNumber % quotes.length; // quotes.length is 5
+
+    // Step 4: display the quote
+    document.write("<p><strong>Quote of the Day:</strong> " + quotes[index] + "</p>");
+
+    // Step 5: create an array of 3 favorite website URLs
+    var websites = [
+      "https://www.google.com",
+      "https://www.youtube.com",
+      "https://www.wikipedia.org"
+    ];
+
+    // Step 6: write initial websites as working links
+    document.write("<h2>Favorite Websites</h2>");
+    document.write("<ul>");
+    for (var i = 0; i < websites.length; i++) {
+      document.write("<li><a href='" + websites[i] + "' target='_blank'>" + websites[i] + "</a></li>");
+    }
+    document.write("</ul>");
+
+    // Step 7: prompt the user for their favorite website
+    var favoriteWebsite = prompt("Enter your favorite website URL (include https://). Example: https://www.example.com");
+
+    // If user cancels or enters blank, provide a safe default so the rest of the lab works
+    if (favoriteWebsite === null || favoriteWebsite.trim() === "") {
+      favoriteWebsite = "https://example.com";
+    }
+
+    // Step 8: add the user's site to the end of the array
+    websites.push(favoriteWebsite);
+
+    // Step 9: delete the first website from the array
+    websites.shift();
+
+    // Step 10: display the updated websites list
+    document.write("<h2>Updated Websites</h2>");
+    document.write("<ul>");
+    for (var j = 0; j < websites.length; j++) {
+      document.write("<li><a href='" + websites[j] + "' target='_blank'>" + websites[j] + "</a></li>");
+    }
+    document.write("</ul>");
+  </script>
+</body>
+</html>
